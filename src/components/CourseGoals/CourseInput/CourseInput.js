@@ -31,33 +31,53 @@ const FormControl = styled.div`
 `;
 
 const CourseInput = (props) => {
-  const [enteredValue, setEnteredValue] = useState("");
-  const [isValid, setIsValid] = useState("true");
+  const [enteredAge, setEnteredAge] = useState("");
+  const [enteredName, setEnteredName] = useState("");
+  const [isAgeValid, setIsAgeValid] = useState("true");
+  const [isNameValid, setIsNameValid] = useState("true");
 
-  const goalInputChangeHandler = (event) => {
+  const nameInputChangeHandler = (event) => {
+    //add here - what happens if there is nothing 
     if (event.target.value.trim().length > 0) {
-      setIsValid(true);
+      setIsNameValid(true);
     }
-    setEnteredValue(event.target.value);
+    setEnteredName(event.target.value);
+  };
+
+  const ageInputChangeHandler = (event) => {
+    //add here - what happens if it is negative 
+    if (event.target.value.trim().length > 0) {
+      setIsAgeValid(true);
+    }
+    setEnteredAge(event.target.value);
   };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    if (enteredValue.trim().length === 0) {
-      setIsValid(false);
-
+    if (enteredAge.trim().length === 0) {
+      setIsAgeValid(false);
       return;
     }
-    props.onAddGoal(enteredValue);
+    else if (enteredName.trim().length === 0) {
+      setIsNameValid(false);
+      return; 
+    }
+    
+    props.onAddGoal(enteredName);
   };
 
+  /////////////////////////////////////////////
   return (
     <form onSubmit={formSubmitHandler}>
-      <FormControl invalid={!isValid}>
-        <label>Course Goal</label>
-        <input type="text" onChange={goalInputChangeHandler} />
+      <FormControl invalid={!isNameValid}>
+        <label>Username</label>
+        <input type="text" onChange={nameInputChangeHandler} />
       </FormControl>
-      <Button type="submit">Add Goal</Button>
+      <FormControl invalid={!isAgeValid}>
+        <label>Age (Years)</label>
+        <input type="text" onChange={ageInputChangeHandler} />
+      </FormControl>
+      <Button type="submit">Add User</Button>
     </form>
   );
 };
