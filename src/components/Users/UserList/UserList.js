@@ -5,14 +5,14 @@ import './UserList.css';
 
 const UserList = props => {
   return (
-    <ul className="goal-list">
-      {props.items.map(goal => (
+    <ul className="user-list">
+      {props.items.map(user => (
         <UserItem
-          key={goal.id}
-          id={goal.id}
+          key={user.id}
+          id={user.id}
           onDelete={props.onDeleteItem}
         >
-          {goal.text}
+          {user.text}
         </UserItem>
       ))}
     </ul>

@@ -11,7 +11,7 @@ const UserItem = props => {
   };
 
   return (
-    <li className="goal-item" onClick={deleteHandler}>
+    <li className="user-item" onClick={deleteHandler}>
       {props.children}
     </li>
   );

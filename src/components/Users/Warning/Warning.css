@@ -1,5 +1,10 @@
-.popup {
-    position: relative;
+/*.popup {
+    position: absolute;
     display: inline-block;
-    cursor: pointer;
+    cursor: crosshair;
 }
+
+.popupText {
+    display: none;
+}*/
+

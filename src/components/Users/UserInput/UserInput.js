@@ -36,6 +36,9 @@ const UserInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [isAgeValid, setIsAgeValid] = useState("true");
   const [isNameValid, setIsNameValid] = useState("true");
+  const [isAgeValidSubmit, setIsAgeValidSubmit] = useState("true");
+  const [isNameValidSubmit, setIsNameValidSubmit] = useState("true");
+
 
   const nameInputChangeHandler = (event) => {
     //add here - what happens if there is nothing 
@@ -48,19 +51,7 @@ const UserInput = (props) => {
     setEnteredName(event.target.value);
   };
 
-  const namePopupHandler = (props) => {
-    if (isNameValid){
-       return;
-    }
-    else {
-    //change the css here - how to do that? 
-    }
-
-  }
-
-
   const ageInputChangeHandler = (event) => {
-    //add here - what happens if it is negative 
     if (event.target.value.trim().length > 0) {
       setIsAgeValid(true);
     }
@@ -71,15 +62,23 @@ const UserInput = (props) => {
     event.preventDefault();
     if (enteredAge.trim().length === 0) {
       setIsAgeValid(false);
+      setIsAgeValidSubmit(false);
       return;
     }
     else if (enteredName.trim().length === 0) {
       setIsNameValid(false);
+      setIsNameValidSubmit(false);
       return; 
     }
-    
-    props.onAddGoal(enteredName);
+    props.onAddUser(enteredName);
   };
+  
+  const errorChangeHandler = () => {
+    setIsNameValid(true);
+    setIsNameValidSubmit(true);
+    setIsAgeValid(true);
+    setIsAgeValidSubmit(true);
+  }
 
   /////////////////////////////////////////////
   
@@ -98,7 +97,7 @@ const UserInput = (props) => {
 
       <Button type="submit">Add User</Button>
 
-      <WarningMessage></WarningMessage>
+      <WarningMessage onConfirmError={errorChangeHandler} nameError={isNameValidSubmit} ageError={isAgeValidSubmit}></WarningMessage>
 
     </form>
   );

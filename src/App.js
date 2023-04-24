@@ -5,28 +5,35 @@ import UserInput from './components/Users/UserInput/UserInput';
 import './App.css';
 
 const App = () => {
+  
   const [Users, setUsers] = useState([
-    { text: 'Do all exercises!', id: 'g1' },
-    { text: 'Finish the course!', id: 'g2' }
+    { text: 'User 1', id: 'g1' },
+    { text: 'User 2', id: 'g2' }
   ]);
 
   const addUserHandler = enteredText => {
-    setUsers(prevGoals => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
-      return updatedGoals;
+    setUsers(prevUsers => {
+      const updatedUsers = [...prevUsers];
+      updatedUsers.unshift({ text: enteredText, id: Math.random().toString() });
+      return updatedUsers;
     });
   };
 
-  const deleteItemHandler = goalId => {
-    setUsers(prevGoals => {
-      const updatedGoals = prevGoals.filter(goal => goal.id !== goalId);
-      return updatedGoals;
+  const deleteItemHandler = userId => {
+    setUsers(prevUsers => {
+      const updatedUsers = prevUsers.filter(user => user.id !== userId);
+      return updatedUsers;
     });
+  };
+
+  const newErrorHandler = () => {
+    //left off here - need to add some kind of change to the App.css .page-cover
+    //class from display none to display block when there is an error in UserInput
+
   };
 
   let content = (
-    <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
+    <p style={{ textAlign: 'center' }}>No users found. Maybe add one?</p>
   );
 
   if (Users.length > 0) {
@@ -37,17 +44,18 @@ const App = () => {
 
   return (
     <div>
-      <section id="goal-form">
-        <UserInput onAddUser={addUserHandler} />
+      <div className='page-cover'></div>
+      <section id="user-form">
+        <UserInput onAddUser={addUserHandler} onNewError={newErrorHandler}/>
       </section>
-      <section id="goals">
+      <section id="users">
         {content}
         {/* {Users.length > 0 && (
           <UserList
             items={Users}
             onDeleteItem={deleteItemHandler}
           />
-        ) // <p style={{ textAlign: 'center' }}>No goals found. Maybe add one?</p>
+        ) // <p style={{ textAlign: 'center' }}>No users found. Maybe add one?</p>
         } */}
       </section>
     </div>

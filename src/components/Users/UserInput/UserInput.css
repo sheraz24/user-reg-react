@@ -31,3 +31,13 @@
 .form-control.invalid label {
   color: red;
 }
+
+.popup {
+  position: absolute;
+  display: inline-block;
+  cursor: crosshair;
+}
+
+.popupText {
+  display: none;
+}
